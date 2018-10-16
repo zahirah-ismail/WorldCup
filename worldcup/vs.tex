@@ -1,0 +1,845 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={display},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{display}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{matches <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"WorldCupMatches.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{,}\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{players <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =}\StringTok{"WorldCupPlayers.csv"}\NormalTok{,}\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{,}\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{worldcups <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =}\StringTok{"WorldCups.csv"}\NormalTok{,}\DataTypeTok{stringsAsFactors =} \OtherTok{FALSE}\NormalTok{ ,}\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{)}
+
+
+\NormalTok{## exploring raw data}
+\KeywordTok{names}\NormalTok{(matches)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Year"                 "Datetime"             "Stage"               
+##  [4] "Stadium"              "City"                 "Home.Team.Name"      
+##  [7] "Home.Team.Goals"      "Away.Team.Goals"      "Away.Team.Name"      
+## [10] "Win.conditions"       "Attendance"           "Half.time.Home.Goals"
+## [13] "Half.time.Away.Goals" "Referee"              "Assistant.1"         
+## [16] "Assistant.2"          "RoundID"              "MatchID"             
+## [19] "Home.Team.Initials"   "Away.Team.Initials"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(matches)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Year        Datetime            Stage             Stadium         
+##  Min.   :1930   Length:4572        Length:4572        Length:4572       
+##  1st Qu.:1970   Class :character   Class :character   Class :character  
+##  Median :1990   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :1985                                                           
+##  3rd Qu.:2002                                                           
+##  Max.   :2014                                                           
+##  NA's   :3720                                                           
+##      City           Home.Team.Name     Home.Team.Goals  Away.Team.Goals
+##  Length:4572        Length:4572        Min.   : 0.000   Min.   :0.000  
+##  Class :character   Class :character   1st Qu.: 1.000   1st Qu.:0.000  
+##  Mode  :character   Mode  :character   Median : 2.000   Median :1.000  
+##                                        Mean   : 1.811   Mean   :1.022  
+##                                        3rd Qu.: 3.000   3rd Qu.:2.000  
+##                                        Max.   :10.000   Max.   :7.000  
+##                                        NA's   :3720     NA's   :3720   
+##  Away.Team.Name     Win.conditions       Attendance    
+##  Length:4572        Length:4572        Min.   :  2000  
+##  Class :character   Class :character   1st Qu.: 30000  
+##  Mode  :character   Mode  :character   Median : 41580  
+##                                        Mean   : 45165  
+##                                        3rd Qu.: 61375  
+##                                        Max.   :173850  
+##                                        NA's   :3722    
+##  Half.time.Home.Goals Half.time.Away.Goals   Referee         
+##  Min.   :0.000        Min.   :0.000        Length:4572       
+##  1st Qu.:0.000        1st Qu.:0.000        Class :character  
+##  Median :0.000        Median :0.000        Mode  :character  
+##  Mean   :0.709        Mean   :0.428                          
+##  3rd Qu.:1.000        3rd Qu.:1.000                          
+##  Max.   :6.000        Max.   :5.000                          
+##  NA's   :3720         NA's   :3720                           
+##  Assistant.1        Assistant.2           RoundID        
+##  Length:4572        Length:4572        Min.   :     201  
+##  Class :character   Class :character   1st Qu.:     262  
+##  Mode  :character   Mode  :character   Median :     337  
+##                                        Mean   :10661773  
+##                                        3rd Qu.:  249722  
+##                                        Max.   :97410600  
+##                                        NA's   :3720      
+##     MatchID          Home.Team.Initials Away.Team.Initials
+##  Min.   :       25   Length:4572        Length:4572       
+##  1st Qu.:     1189   Class :character   Class :character  
+##  Median :     2191   Mode  :character   Mode  :character  
+##  Mean   : 61346868                                        
+##  3rd Qu.: 43950059                                        
+##  Max.   :300186515                                        
+##  NA's   :3720
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(matches)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Year             Datetime   Stage        Stadium        City
+## 1 1930 13 Jul 1930 - 15:00  Group 1        Pocitos Montevideo 
+## 2 1930 13 Jul 1930 - 15:00  Group 4 Parque Central Montevideo 
+## 3 1930 14 Jul 1930 - 12:45  Group 2 Parque Central Montevideo 
+## 4 1930 14 Jul 1930 - 14:50  Group 3        Pocitos Montevideo 
+## 5 1930 15 Jul 1930 - 16:00  Group 1 Parque Central Montevideo 
+## 6 1930 16 Jul 1930 - 14:45  Group 1 Parque Central Montevideo 
+##   Home.Team.Name Home.Team.Goals Away.Team.Goals Away.Team.Name
+## 1         France               4               1         Mexico
+## 2            USA               3               0        Belgium
+## 3     Yugoslavia               2               1         Brazil
+## 4        Romania               3               1           Peru
+## 5      Argentina               1               0         France
+## 6          Chile               3               0         Mexico
+##   Win.conditions Attendance Half.time.Home.Goals Half.time.Away.Goals
+## 1                      4444                    3                    0
+## 2                     18346                    2                    0
+## 3                     24059                    2                    0
+## 4                      2549                    1                    0
+## 5                     23409                    0                    0
+## 6                      9249                    1                    0
+##                  Referee              Assistant.1
+## 1 LOMBARDI Domingo (URU)    CRISTOPHE Henry (BEL)
+## 2      MACIAS Jose (ARG) MATEUCCI Francisco (URU)
+## 3    TEJADA Anibal (URU)  VALLARINO Ricardo (URU)
+## 4  WARNKEN Alberto (CHI)      LANGENUS Jean (BEL)
+## 5    REGO Gilberto (BRA)     SAUCEDO Ulises (BOL)
+## 6  CRISTOPHE Henry (BEL)  APHESTEGUY Martin (URU)
+##                  Assistant.2 RoundID MatchID Home.Team.Initials
+## 1        REGO Gilberto (BRA)     201    1096                FRA
+## 2      WARNKEN Alberto (CHI)     201    1090                USA
+## 3        BALWAY Thomas (FRA)     201    1093                YUG
+## 4   MATEUCCI Francisco (URU)     201    1098                ROU
+## 5 RADULESCU Constantin (ROU)     201    1085                ARG
+## 6        LANGENUS Jean (BEL)     201    1095                CHI
+##   Away.Team.Initials
+## 1                MEX
+## 2                BEL
+## 3                BRA
+## 4                PER
+## 5                FRA
+## 6                MEX
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(players)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "RoundID"       "MatchID"       "Team.Initials" "Coach.Name"   
+## [5] "Line.up"       "Shirt.Number"  "Player.Name"   "Position"     
+## [9] "Event"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(players)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     RoundID            MatchID          Team.Initials     
+##  Min.   :     201   Min.   :       25   Length:37784      
+##  1st Qu.:     263   1st Qu.:     1199   Class :character  
+##  Median :     337   Median :     2216   Mode  :character  
+##  Mean   :11056474   Mean   : 63622330                     
+##  3rd Qu.:  255931   3rd Qu.: 97410003                     
+##  Max.   :97410600   Max.   :300186515                     
+##   Coach.Name          Line.up           Shirt.Number   Player.Name       
+##  Length:37784       Length:37784       Min.   : 0.00   Length:37784      
+##  Class :character   Class :character   1st Qu.: 5.00   Class :character  
+##  Mode  :character   Mode  :character   Median :11.00   Mode  :character  
+##                                        Mean   :10.73                     
+##                                        3rd Qu.:17.00                     
+##                                        Max.   :23.00                     
+##    Position            Event          
+##  Length:37784       Length:37784      
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character  
+##                                       
+##                                       
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(players)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   RoundID MatchID Team.Initials          Coach.Name Line.up Shirt.Number
+## 1     201    1096           FRA CAUDRON Raoul (FRA)       S            0
+## 2     201    1096           MEX    LUQUE Juan (MEX)       S            0
+## 3     201    1096           FRA CAUDRON Raoul (FRA)       S            0
+## 4     201    1096           MEX    LUQUE Juan (MEX)       S            0
+## 5     201    1096           FRA CAUDRON Raoul (FRA)       S            0
+## 6     201    1096           MEX    LUQUE Juan (MEX)       S            0
+##        Player.Name Position Event
+## 1      Alex THEPOT       GK      
+## 2  Oscar BONFIGLIO       GK      
+## 3 Marcel LANGILLER           G40'
+## 4     Juan CARRENO           G70'
+## 5  Ernest LIBERATI               
+## 6     Rafael GARZA        C
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(worldcups)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "Year"           "Country"        "Winner"         "Runners.Up"    
+##  [5] "Third"          "Fourth"         "GoalsScored"    "QualifiedTeams"
+##  [9] "MatchesPlayed"  "Attendance"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(worldcups)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Year        Country             Winner           Runners.Up       
+##  Min.   :1930   Length:20          Length:20          Length:20         
+##  1st Qu.:1957   Class :character   Class :character   Class :character  
+##  Median :1976   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :1975                                                           
+##  3rd Qu.:1995                                                           
+##  Max.   :2014                                                           
+##     Third              Fourth           GoalsScored    QualifiedTeams 
+##  Length:20          Length:20          Min.   : 70.0   Min.   :13.00  
+##  Class :character   Class :character   1st Qu.: 89.0   1st Qu.:16.00  
+##  Mode  :character   Mode  :character   Median :120.5   Median :16.00  
+##                                        Mean   :119.0   Mean   :21.25  
+##                                        3rd Qu.:145.2   3rd Qu.:26.00  
+##                                        Max.   :171.0   Max.   :32.00  
+##  MatchesPlayed   Attendance       
+##  Min.   :17.0   Length:20         
+##  1st Qu.:30.5   Class :character  
+##  Median :38.0   Mode  :character  
+##  Mean   :41.8                     
+##  3rd Qu.:55.0                     
+##  Max.   :64.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(worldcups)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Year     Country     Winner     Runners.Up   Third     Fourth
+## 1 1930     Uruguay    Uruguay      Argentina     USA Yugoslavia
+## 2 1934       Italy      Italy Czechoslovakia Germany    Austria
+## 3 1938      France      Italy        Hungary  Brazil     Sweden
+## 4 1950      Brazil    Uruguay         Brazil  Sweden      Spain
+## 5 1954 Switzerland Germany FR        Hungary Austria    Uruguay
+## 6 1958      Sweden     Brazil         Sweden  France Germany FR
+##   GoalsScored QualifiedTeams MatchesPlayed Attendance
+## 1          70             13            18    590.549
+## 2          70             16            17    363.000
+## 3          84             15            18    375.700
+## 4          88             13            22  1.045.246
+## 5         140             16            26    768.607
+## 6         126             16            35    819.810
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(DataExplorer)}
+\KeywordTok{plot_str}\NormalTok{(worldcups)}
+\KeywordTok{plot_histogram}\NormalTok{(worldcups)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot_bar}\NormalTok{(worldcups) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##  checking for NA's and then cleaning data }
+
+\NormalTok{##sum(is.na(matches$Home.Team.Name))}
+\CommentTok{#(is.na(matches$Home.Team.Goals))}
+
+\CommentTok{#sum(is.na(matches$Away.Team.Name))}
+\CommentTok{#sum(is.na(matches$Away.Team.Goals))}
+
+\KeywordTok{library}\NormalTok{(VIM)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: colorspace
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: grid
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: data.table
+\end{verbatim}
+
+\begin{verbatim}
+## VIM is ready to use. 
+##  Since version 4.0.0 the GUI is in its own package VIMGUI.
+## 
+##           Please use the package to use the new (and old) GUI.
+\end{verbatim}
+
+\begin{verbatim}
+## Suggestions and bug-reports can be submitted at: https://github.com/alexkowa/VIM/issues
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'VIM'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:datasets':
+## 
+##     sleep
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##library(easyGgplot2)}
+\NormalTok{matches1 <-}\StringTok{ }\KeywordTok{kNN}\NormalTok{(matches, }\DataTypeTok{variable =} \KeywordTok{c}\NormalTok{(}\StringTok{"Home.Team.Goals"}\NormalTok{, }\StringTok{"Away.Team.Goals"}\NormalTok{,}\StringTok{"Attendance"}\NormalTok{), }\DataTypeTok{k =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+
+## Warning in gowerD(don_dist_var, imp_dist_var, weights = weightsx,
+## numericalX, : NAs introduced by coercion
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(matches1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       Year        Datetime            Stage             Stadium         
+##  Min.   :1930   Length:4572        Length:4572        Length:4572       
+##  1st Qu.:1970   Class :character   Class :character   Class :character  
+##  Median :1990   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :1985                                                           
+##  3rd Qu.:2002                                                           
+##  Max.   :2014                                                           
+##  NA's   :3720                                                           
+##      City           Home.Team.Name     Home.Team.Goals  Away.Team.Goals
+##  Length:4572        Length:4572        Min.   : 0.000   Min.   :0.000  
+##  Class :character   Class :character   1st Qu.: 1.000   1st Qu.:4.000  
+##  Mode  :character   Mode  :character   Median : 1.000   Median :4.000  
+##                                        Mean   : 1.151   Mean   :3.445  
+##                                        3rd Qu.: 1.000   3rd Qu.:4.000  
+##                                        Max.   :10.000   Max.   :7.000  
+##                                                                        
+##  Away.Team.Name     Win.conditions       Attendance    
+##  Length:4572        Length:4572        Min.   :  2000  
+##  Class :character   Class :character   1st Qu.: 58141  
+##  Mode  :character   Mode  :character   Median : 58141  
+##                                        Mean   : 55729  
+##                                        3rd Qu.: 58141  
+##                                        Max.   :173850  
+##                                                        
+##  Half.time.Home.Goals Half.time.Away.Goals   Referee         
+##  Min.   :0.000        Min.   :0.000        Length:4572       
+##  1st Qu.:0.000        1st Qu.:0.000        Class :character  
+##  Median :0.000        Median :0.000        Mode  :character  
+##  Mean   :0.709        Mean   :0.428                          
+##  3rd Qu.:1.000        3rd Qu.:1.000                          
+##  Max.   :6.000        Max.   :5.000                          
+##  NA's   :3720         NA's   :3720                           
+##  Assistant.1        Assistant.2           RoundID        
+##  Length:4572        Length:4572        Min.   :     201  
+##  Class :character   Class :character   1st Qu.:     262  
+##  Mode  :character   Mode  :character   Median :     337  
+##                                        Mean   :10661773  
+##                                        3rd Qu.:  249722  
+##                                        Max.   :97410600  
+##                                        NA's   :3720      
+##     MatchID          Home.Team.Initials Away.Team.Initials
+##  Min.   :       25   Length:4572        Length:4572       
+##  1st Qu.:     1189   Class :character   Class :character  
+##  Median :     2191   Mode  :character   Mode  :character  
+##  Mean   : 61346868                                        
+##  3rd Qu.: 43950059                                        
+##  Max.   :300186515                                        
+##  NA's   :3720                                             
+##  Home.Team.Goals_imp Away.Team.Goals_imp Attendance_imp 
+##  Mode :logical       Mode :logical       Mode :logical  
+##  FALSE:852           FALSE:852           FALSE:850      
+##  TRUE :3720          TRUE :3720          TRUE :3722     
+##                                                         
+##                                                         
+##                                                         
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(matches1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Year             Datetime   Stage        Stadium        City
+## 1 1930 13 Jul 1930 - 15:00  Group 1        Pocitos Montevideo 
+## 2 1930 13 Jul 1930 - 15:00  Group 4 Parque Central Montevideo 
+## 3 1930 14 Jul 1930 - 12:45  Group 2 Parque Central Montevideo 
+## 4 1930 14 Jul 1930 - 14:50  Group 3        Pocitos Montevideo 
+## 5 1930 15 Jul 1930 - 16:00  Group 1 Parque Central Montevideo 
+## 6 1930 16 Jul 1930 - 14:45  Group 1 Parque Central Montevideo 
+##   Home.Team.Name Home.Team.Goals Away.Team.Goals Away.Team.Name
+## 1         France               4               1         Mexico
+## 2            USA               3               0        Belgium
+## 3     Yugoslavia               2               1         Brazil
+## 4        Romania               3               1           Peru
+## 5      Argentina               1               0         France
+## 6          Chile               3               0         Mexico
+##   Win.conditions Attendance Half.time.Home.Goals Half.time.Away.Goals
+## 1                      4444                    3                    0
+## 2                     18346                    2                    0
+## 3                     24059                    2                    0
+## 4                      2549                    1                    0
+## 5                     23409                    0                    0
+## 6                      9249                    1                    0
+##                  Referee              Assistant.1
+## 1 LOMBARDI Domingo (URU)    CRISTOPHE Henry (BEL)
+## 2      MACIAS Jose (ARG) MATEUCCI Francisco (URU)
+## 3    TEJADA Anibal (URU)  VALLARINO Ricardo (URU)
+## 4  WARNKEN Alberto (CHI)      LANGENUS Jean (BEL)
+## 5    REGO Gilberto (BRA)     SAUCEDO Ulises (BOL)
+## 6  CRISTOPHE Henry (BEL)  APHESTEGUY Martin (URU)
+##                  Assistant.2 RoundID MatchID Home.Team.Initials
+## 1        REGO Gilberto (BRA)     201    1096                FRA
+## 2      WARNKEN Alberto (CHI)     201    1090                USA
+## 3        BALWAY Thomas (FRA)     201    1093                YUG
+## 4   MATEUCCI Francisco (URU)     201    1098                ROU
+## 5 RADULESCU Constantin (ROU)     201    1085                ARG
+## 6        LANGENUS Jean (BEL)     201    1095                CHI
+##   Away.Team.Initials Home.Team.Goals_imp Away.Team.Goals_imp
+## 1                MEX               FALSE               FALSE
+## 2                BEL               FALSE               FALSE
+## 3                BRA               FALSE               FALSE
+## 4                PER               FALSE               FALSE
+## 5                FRA               FALSE               FALSE
+## 6                MEX               FALSE               FALSE
+##   Attendance_imp
+## 1          FALSE
+## 2          FALSE
+## 3          FALSE
+## 4          FALSE
+## 5          FALSE
+## 6          FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# display number of goals at home}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ matches1) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\KeywordTok{reorder}\NormalTok{(Home.Team.Goals,Home.Team.Goals, length)))}\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"number of goals scored at home"}\NormalTok{)}\OperatorTok{+}\StringTok{ }\KeywordTok{coord_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# display number of goals away}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ matches1) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\KeywordTok{reorder}\NormalTok{(Away.Team.Goals,Away.Team.Goals, length)))}\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"number of goals scored away"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#}
+
+\CommentTok{# group stages}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ matches1) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\KeywordTok{reorder}\NormalTok{(Stage,Stage, length)))}\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"group stages"}\NormalTok{)}\OperatorTok{+}\StringTok{ }\KeywordTok{coord_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# winners}
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ worldcups) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\KeywordTok{reorder}\NormalTok{(Winner,Winner, length)))}\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"winners"}\NormalTok{)}\OperatorTok{+}\StringTok{ }\KeywordTok{coord_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# home goals}
+\CommentTok{#home_goal <- ggplot(matches1, aes(x=Home.Team.Name, y=Home.Team.Goals)) #+ geom_bar(stat = "identity", aes(fill=Home.Team.Name))+ coord_flip()}
+\CommentTok{#print(home_goal)}
+
+\CommentTok{#away goals}
+\CommentTok{#away_goal <- ggplot(matches1, aes(x=Away.Team.Name, y=Away.Team.Goals)) #+ geom_bar(stat = "identity", aes(fill=Home.Team.Name))+ coord_flip()}
+\CommentTok{#print(away_goal)}
+
+\CommentTok{#winner vs attendance}
+\NormalTok{winner_attendance <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(worldcups, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Winner, }\DataTypeTok{y=}\NormalTok{ Attendance )) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill=}\NormalTok{Winner))}
+\KeywordTok{print}\NormalTok{(winner_attendance)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# year and attendance }
+\NormalTok{gg_bar <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(worldcups, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Year, }\DataTypeTok{y=}\NormalTok{ Attendance )) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill=}\NormalTok{Year))}
+\KeywordTok{print}\NormalTok{(gg_bar)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-8.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# converting to an int}
+
+\NormalTok{worldcups}\OperatorTok{$}\NormalTok{Year  <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(worldcups}\OperatorTok{$}\NormalTok{Year))}
+
+
+ \CommentTok{# plot of attendance vs year}
+
+\KeywordTok{ggplot}\NormalTok{(worldcups, }\KeywordTok{aes}\NormalTok{(Year, Attendance)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Year"}\NormalTok{, }
+       \DataTypeTok{y =} \StringTok{"attendeance "}\NormalTok{, }
+       \DataTypeTok{title =} \StringTok{"attendance in each year"}\NormalTok{)}\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{))  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## geom_path: Each group consists of only one observation. Do you need to
+## adjust the group aesthetic?
+\end{verbatim}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-9.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# runner up}
+
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ worldcups) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\KeywordTok{reorder}\NormalTok{( Runners.Up ,Runners.Up , length)))}\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Runners.Up"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-10.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{##winner vs match played}
+\NormalTok{winner_matchPlayed <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(worldcups, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{Winner, }\DataTypeTok{y=}\NormalTok{ MatchesPlayed )) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill=}\NormalTok{Winner))}
+\KeywordTok{print}\NormalTok{(winner_matchPlayed)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{vs_files/figure-latex/unnamed-chunk-1-11.pdf}
+
+
+\end{document}
